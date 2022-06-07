@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% load static %}
+</head>
+
+<!--Navbar-->
+<nav>
+  <div class="nav-wrapper" style="background-color: #DD4A48;">
+    <a href="{% url 'home' %}" class="brand-logo"><i class="material-icons" style="font-style: normal;"><img src="{% static 'app/img/2.png' %}" alt=""></a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="{% url 'busqueda' %}"><i class="fa fa-search" style="font-size: medium;"></i></a></li>
+      <li><a href="{% url 'InicioSesion' %}" style="font-size: medium; font-style: normal;">Iniciar Sesión</a></li>
+      <li><a href="{% url 'productos' %}" style="font-size: medium; font-style: normal;">Catálogo</a></li>
+      <li><a href="{% url 'carritodecompras' %}"><i class="glyphicon glyphicon-shopping-cart"></i></a></li>
+    </ul>
+  </div>
+</nav>
+<!--Fondo de la página-->
+<body style="background-image: url({% static 'app/img/fondotester.jpg' %});" >
+    
+  <!--Espaciados-->
+  <br><br><br><br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="img/catalogo.png" alt="">
+  <br><br><br><br>
+
+  <div> 
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="{% url 'arroz' %}"><img src="{% static 'app/img/Catalogo/Arroz.jpeg' %}" alt="" width="346" height="300" style="border-radius: 20px;"></a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="{% url 'aguamineral' %}"><img src="{% static 'app/img/Catalogo/AwaMineral.jpeg' %}" alt="" width="346" height="300" style="border-radius: 20px;"></a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="{% url 'bebidas' %}"><img src="{% static 'app/img/Catalogo/Bebida.jpeg' %}" alt="" width="346" height="300"style="border-radius: 20px;"></a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="{% url 'cafe' %}"><img src="{% static 'app/img/Catalogo/Cafe.jpeg' %}" alt="" width="346" height="300"style="border-radius: 20px;"></a>
+  </div>
+  <br><br><br>
+  <div>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="{% url 'chocolate' %}"><img src="{% static 'app/img/Catalogo/Chocolate.jpeg' %}" alt="" width="346" height="300" style="border-radius: 20px;"></a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="{% url 'confort' %}"><img src="{% static 'app/img/Catalogo/Confort.jpeg' %}" alt="" width="346" height="300" style="border-radius: 20px;"></a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="{% url 'desodoranteamb' %}"><img src="{% static 'app/img/Catalogo/DesodoranteAmbient.jpeg' %}" alt="" width="346" height="300"style="border-radius: 20px;"></a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="{% url 'detergente' %}"><img src="{% static 'app/img/Catalogo/Detergente.jpeg' %}" alt="" width="346" height="300"style="border-radius: 20px;"></a>
+  </div>
+  <br><br><br>
+  <div>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="{% url 'dulceambroso' %}"><img src="{% static 'app/img/Catalogo/DulcesAmbro.jpeg' %}" alt="" width="346" height="300" style="border-radius: 20px;"></a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="{% url 'fideos' %}"><img src="{% static 'app/img/Catalogo/Fideos.jpeg' %}" alt="" width="346" height="300" style="border-radius: 20px;"></a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="{% url 'galleta' %}"><img src="{% static 'app/img/Catalogo/Galleta.jpeg' %}" alt="" width="346" height="300"style="border-radius: 20px;"></a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="{% url 'huevosdepascua' %}"><img src="{% static 'app/img/Catalogo/HuevosdeCocholate.jpeg' %}" alt="" width="346" height="300"style="border-radius: 20px;"></a>
+  </div>
+  <br><br><br>
+  <div>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="{% url 'jugos' %}"><img src="{% static 'app/img/Catalogo/Jugos.jpeg' %}" alt="" width="346" height="300" style="border-radius: 20px;"></a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="{% url 'lavaloza' %}"><img src="{% static 'app/img/Catalogo/Lavaloza.jpeg' %}" alt="" width="346" height="300" style="border-radius: 20px;"></a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="{% url 'leche' %}"><img src="{% static 'app/img/Catalogo/Leche.jpeg' %}" alt="" width="346" height="300"style="border-radius: 20px;"></a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="{% url 'maruchan' %}"><img src="{% static 'app/img/Catalogo/maruchan.jpeg' %}" alt="" width="346" height="300"style="border-radius: 20px;"></a>
+  </div>
+  <br><br>
+  <br>
+  <div>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="{% url 'pastadedientes' %}"><img src="{% static 'app/img/Catalogo/PastadeDientes.jpeg' %}" alt="" width="346" height="300" style="border-radius: 20px;"></a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="{% url 'salsatomate' %}"><img src="{% static 'app/img/Catalogo/salsaTomate.jpeg' %}"alt="" width="346" height="300" style="border-radius: 20px;"></a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="{% url 'te' %}"><img src="{% static 'app/img/Catalogo/te.jpeg' %}" width="346" height="300"style="border-radius: 20px;"></a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="{% url 'yoghurt' %}"><img src="{% static 'app/img/Catalogo/yoghurt.jpeg' %}" alt="" width="346" height="300"style="border-radius: 20px;"></a>
+  </div>
+  <br><br>
+  <br><br>
+<!--Footer-->
+<footer class="page-footer" id="footers" style="background-color: #DD4A48;">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text"><b>Acerca de Almacen YUYITOS</b></h5>
+        <a href="{% url 'quienessomos' %}"><p class="grey-text text-lighten-4"><H6 style="color: white;">¿Quienes Somos?</H6></p></a>
+        <a href=""><p class="grey-text text-lighten-4"><H6 style="color: white;">Términos y condiciones</H6></p></a>
+        <a href=""><p class="grey-text text-lighten-4"><H6 style="color: white;">Politica de privacidad</H6></p></a>
+        <a href=""><p class="grey-text text-lighten-4"><H6 style="color: white;">Información legal</H6></p></a>
+      </div>
+      <div class="col l4 offset-l2 s12">
+        <h5 class="white-text">¡Síguenos en instagram!</h5>
+        <ul>
+          <li><a class="fa fa-instagram" href="https://www.instagram.com/almacenyuyitos/" style="color: white; font-size: 20px;"></a></a>
+          <br><br><h5 class="white-text">¡Medios de Pago! <br> <br><p>- RedCompra <br><br></p></h5></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+    © 2022 Copyright Pagina Web
+    <a class="grey-text text-lighten-4 right" href="https://wa.me/+56994888066">¡Contáctanos!&nbsp;&nbsp;<p class="fa fa-whatsapp"></p></a>
+    </div>
+  </div>
+
+</footer>
+</body>
+
+</html>
