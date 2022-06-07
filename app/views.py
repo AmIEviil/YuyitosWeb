@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.db import connection
 # Create your views here.
 
 def aguamineral(request):
@@ -72,7 +72,12 @@ def pastadedientes(request):
     return render(request,'app/pastadedientes.html')
 
 def productos(request):
-    return render(request,'app/productos.html')
+    data = {
+        'productos':listado_Productos(),
+        'categorias':listado_Tipo_Productos(),
+    }
+    print(listado_Tipo_Productos())
+    return render(request,'app/productos.html', data)
 
 def quienessomos(request):
     return render(request,'app/quienessomos.html')
@@ -91,3 +96,29 @@ def yoghurt(request):
 
 def delivery(request):
     return render(request,'app/delivery.html')
+
+def listado_Productos():
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_PRODUCTOS", [out_cur])
+
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+
+    return lista
+
+def listado_Tipo_Productos():
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_TIPO_PRODUCTOS", [out_cur])
+
+    lista = []
+    for fila in out_cur:
+        lista.append(fila)
+
+    return lista
