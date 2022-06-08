@@ -9,12 +9,12 @@
   <div class="contenedor">
     {% for c in categorias %}
 
-    <article> <a href="{% url 'home' %}">
+    <article> <a href="{% url 'prod_cat' %}">
       {% if c.img_tipo %}
       <img src="data:img_tipo/png;base64, {{c.img_tipo}}" width="100px" height="100px" alt="">
       {% endif%}
       </a>
-      <h4>{{c.data.1}}</h4>
+      <h4 >{{c.data.1}}</h4>
       
     </article>
 

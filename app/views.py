@@ -1,9 +1,15 @@
+from corsheaders import django
 from django.shortcuts import render
 from django.db import connection
 # Create your views here.
 import base64
 
 from django.template import base
+
+
+def productos_cat(request):
+
+    return render(request, 'app/producto_cat.html')
 
 
 def aguamineral(request):
@@ -63,6 +69,7 @@ def galleta(request):
 
 
 def home(request):
+
     return render(request, 'app/home.html')
 
 
@@ -71,7 +78,7 @@ def huevosdepascua(request):
 
 
 def InicioSesion(request):
-    
+
     return render(request, 'app/InicioSesion.html')
 
 
@@ -107,8 +114,8 @@ def productos(request):
 
     for i in datos_tipos:
         data = {
-            'data':i,
-            'img_tipo':str(base64.b64encode(i[2].read()), 'utf-8')
+            'data': i,
+            'img_tipo': str(base64.b64encode(i[2].read()), 'utf-8')
         }
         arreglo.append(data)
     data = {
@@ -152,6 +159,19 @@ def listado_Productos():
 
     lista = []
     for fila in out_cur:
+        lista.append(fila)
+
+    return lista
+
+
+def listado_Productos_Tipo(id_cat):
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_PRODUCTOS_X_CATE", [id_cat])
+
+    lista = []
+    for fila in cursor:
         lista.append(fila)
 
     return lista

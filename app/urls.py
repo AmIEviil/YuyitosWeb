@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import delivery,home,aguamineral,arroz,bebidas,busqueda,cafe,carritodecompras,chocolate,confort,desodoranteamb,detergente,dulceambroso,fiado,fideos,galleta,huevosdepascua,InicioSesion,jugos,lavaloza,leche,maruchan,mediosdepago,pastadedientes,productos,quienessomos,registrarse,salsatomate,te,yoghurt          
+from .views import productos_cat,delivery,home,aguamineral,arroz,bebidas,busqueda,cafe,carritodecompras,chocolate,confort,desodoranteamb,detergente,dulceambroso,fiado,fideos,galleta,huevosdepascua,InicioSesion,jugos,lavaloza,leche,maruchan,mediosdepago,pastadedientes,productos,quienessomos,registrarse,salsatomate,te,yoghurt          
 
 
 urlpatterns = [
@@ -33,4 +33,5 @@ urlpatterns = [
     path('te/', te, name="te"),
     path('yoghurt/', yoghurt, name="yoghurt"),
     path('delivery/', delivery, name="delivery"),
+    path('productos_cat/', productos_cat, name="prod_cat"),
 ]
