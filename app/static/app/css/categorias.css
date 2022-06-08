@@ -9,7 +9,7 @@
 #categorias .contenedor article img{
     width: 250px;
     height: 250px;
-    border: solid 4px rgb(0, 0, 0);
+    border: solid 4px #DD4A48;
     border-radius: 7px;
 }
 

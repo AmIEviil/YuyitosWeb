@@ -1,35 +1,40 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Almacen Yuyitos</title>
     {% load static %}
     {% block css %}
     {% endblock %}
+    <link rel="stylesheet" href="{% static  'app/css/base.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     {% load static %}
 </head>
 
 <!--Navbar-->
+
 <nav>
     <div class="nav-wrapper" style="background-color: #DD4A48;">
         <a href="{% url 'home' %}" class="brand-logo"><i class="material-icons" style="font-style: normal;"><img
                     src="{% static 'app/img/2.png' %}" alt=""></a>
-        <ul class="right hide-on-med-and-down">
+        <ul class="buscar" >
+
+            <li class="buscar"><input class="form-control me-2" type="search" placeholder="Buscar Producto" aria-label="Search"></li>
             <li><a href="{% url 'busqueda' %}"><i class="fa fa-search" style="font-size: medium;"></i></a></li>
-            <li><a href="{% url 'InicioSesion' %}" style="font-size: medium; font-style: normal;">Iniciar Sesión</a>
-            </li>
             <li><a href="{% url 'productos' %}" style="font-size: medium; font-style: normal;">Catálogo</a></li>
+            <li><a href="{% url 'InicioSesion' %}" style="font-size: medium; font-style: normal;">Iniciar Sesión</a></li>
+            {% if user.is_authenticated %}
             <li><a href="{% url 'carritodecompras' %}"><i class="glyphicon glyphicon-shopping-cart"></i></a></li>
+            {% endif %}
         </ul>
     </div>
 </nav>
@@ -37,7 +42,7 @@
 <br><br>
 <!--Fondo de la página-->
 
-<body style="background-image: url({% static 'app/img/fondotester.jpg' %});">
+<body style="background-image: url({% static 'app/img/fondotester.jpg' %})">
     {% block contenido %}
 
     {% endblock %}

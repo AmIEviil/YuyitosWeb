@@ -1,101 +1,146 @@
 from django.shortcuts import render
 from django.db import connection
 # Create your views here.
+import base64
+
+from django.template import base
+
 
 def aguamineral(request):
-    return render(request,'app/aguamineral.html')
+    return render(request, 'app/aguamineral.html')
+
 
 def arroz(request):
-    return render(request,'app/arroz.html')
+    return render(request, 'app/arroz.html')
+
 
 def bebidas(request):
-    return render(request,'app/bebidas.html')
+    return render(request, 'app/bebidas.html')
+
 
 def busqueda(request):
-    return render(request,'app/busqueda.html')
+    return render(request, 'app/busqueda.html')
+
 
 def cafe(request):
-    return render(request,'app/cafe.html')
+    return render(request, 'app/cafe.html')
+
 
 def carritodecompras(request):
-    return render(request,'app/carritodecompras.html')
+    return render(request, 'app/carritodecompras.html')
+
 
 def chocolate(request):
-    return render(request,'app/chocolate.html')
+    return render(request, 'app/chocolate.html')
+
 
 def confort(request):
-    return render(request,'app/confort.html')
+    return render(request, 'app/confort.html')
+
 
 def desodoranteamb(request):
-    return render(request,'app/desodoranteamb.html')
+    return render(request, 'app/desodoranteamb.html')
+
 
 def detergente(request):
-    return render(request,'app/detergente.html')
+    return render(request, 'app/detergente.html')
+
 
 def dulceambroso(request):
-    return render(request,'app/dulceambroso.html')
+    return render(request, 'app/dulceambroso.html')
+
 
 def fiado(request):
-    return render(request,'app/fiado.html')
+    return render(request, 'app/fiado.html')
+
 
 def fideos(request):
-    return render(request,'app/fideos.html')
+    return render(request, 'app/fideos.html')
+
 
 def galleta(request):
-    return render(request,'app/galleta.html')
+    return render(request, 'app/galleta.html')
+
 
 def home(request):
-    return render(request,'app/home.html')
+    return render(request, 'app/home.html')
+
 
 def huevosdepascua(request):
-    return render(request,'app/huevosdepascua.html')
+    return render(request, 'app/huevosdepascua.html')
+
 
 def InicioSesion(request):
-    return render(request,'app/InicioSesion.html')
+    return render(request, 'app/InicioSesion.html')
+
 
 def jugos(request):
-    return render(request,'app/jugos.html')
+    return render(request, 'app/jugos.html')
+
 
 def lavaloza(request):
-    return render(request,'app/lavaloza.html')
+    return render(request, 'app/lavaloza.html')
+
 
 def leche(request):
-    return render(request,'app/leche.html')
+    return render(request, 'app/leche.html')
+
 
 def maruchan(request):
-    return render(request,'app/maruchan.html')
+    return render(request, 'app/maruchan.html')
+
 
 def mediosdepago(request):
-    return render(request,'app/mediosdepago.html')
+    return render(request, 'app/mediosdepago.html')
+
 
 def pastadedientes(request):
-    return render(request,'app/pastadedientes.html')
+    return render(request, 'app/pastadedientes.html')
+
 
 def productos(request):
+
+    datos_tipos = listado_Tipo_Productos()
+
+    arreglo = []
+
+    for i in datos_tipos:
+        data = {
+            'data':i,
+            'img_tipo':str(base64.b64encode(i[2].read()), 'utf-8')
+        }
+        arreglo.append(data)
     data = {
-        'productos':listado_Productos(),
-        'categorias':listado_Tipo_Productos(),
+        'productos': listado_Productos(),
+        'categorias': arreglo,
     }
-    print(listado_Tipo_Productos())
-    return render(request,'app/productos.html', data)
+
+    return render(request, 'app/productos.html', data)
+
 
 def quienessomos(request):
-    return render(request,'app/quienessomos.html')
+    return render(request, 'app/quienessomos.html')
+
 
 def registrarse(request):
-    return render(request,'app/registrarse.html')
+    return render(request, 'app/registrarse.html')
+
 
 def salsatomate(request):
-    return render(request,'app/salsatomate.html')
+    return render(request, 'app/salsatomate.html')
+
 
 def te(request):
-    return render(request,'app/te.html')
+    return render(request, 'app/te.html')
+
 
 def yoghurt(request):
-    return render(request,'app/yoghurt.html')
+    return render(request, 'app/yoghurt.html')
+
 
 def delivery(request):
-    return render(request,'app/delivery.html')
+    return render(request, 'app/delivery.html')
+
 
 def listado_Productos():
     django_cursor = connection.cursor()
@@ -109,6 +154,7 @@ def listado_Productos():
         lista.append(fila)
 
     return lista
+
 
 def listado_Tipo_Productos():
     django_cursor = connection.cursor()

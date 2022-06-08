@@ -10,9 +10,12 @@
     {% for c in categorias %}
 
     <article> <a href="{% url 'home' %}">
-      <img  src="{% static 'app/img/2.png' %}" alt="">
-    </a>
-      <h4 >{{c.1}}</h4>
+      {% if c.img_tipo %}
+      <img src="data:img_tipo/png;base64, {{c.img_tipo}}" width="100px" height="100px" alt="">
+      {% endif%}
+      </a>
+      <h4>{{c.data.1}}</h4>
+      
     </article>
 
     {% endfor %}

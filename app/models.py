@@ -9,7 +9,7 @@ from django.db import models
 
 
 class Boleta(models.Model):
-    id_boleta = models.AutoField(primary_key=True)
+    id_boleta = models.FloatField(primary_key=True)
     detalle_boleta = models.CharField(max_length=100)
     valor_boleta = models.FloatField()
     id_recepcion = models.ForeignKey('RecepcionProducto', models.DO_NOTHING, db_column='id_recepcion')
@@ -22,13 +22,13 @@ class Boleta(models.Model):
 
 
 class Cliente(models.Model):
-    id_cliente = models.AutoField(primary_key=True)
+    id_cliente = models.FloatField(primary_key=True)
     nombre_cliente = models.CharField(max_length=50)
     apellido_paterno = models.CharField(max_length=50)
     apellido_materno = models.CharField(max_length=50)
     rut = models.FloatField()
     dv_rut = models.CharField(max_length=1)
-    fecha_registro = models.CharField(max_length=50)
+    fechar_registro = models.DateField()
     deuda = models.FloatField()
 
     class Meta:
@@ -47,8 +47,9 @@ class CodigoBarra(models.Model):
 
 
 class Comprobante(models.Model):
-    nc = models.AutoField(primary_key=True)
+    nc = models.FloatField(primary_key=True)
     fecha_comprobante = models.CharField(max_length=50)
+    valor = models.FloatField()
     id_empleado = models.ForeignKey('Empleado', models.DO_NOTHING, db_column='id_empleado')
     id_detalle = models.ForeignKey('DetalleBoleta', models.DO_NOTHING, db_column='id_detalle')
 
@@ -58,9 +59,11 @@ class Comprobante(models.Model):
 
 
 class DetalleBoleta(models.Model):
-    id_detalle = models.AutoField(primary_key=True)
+    id_detalle = models.FloatField(primary_key=True)
+    numboleta = models.FloatField()
     producto = models.FloatField()
     cantidad = models.FloatField()
+    precio = models.FloatField()
     id_boleta = models.ForeignKey(Boleta, models.DO_NOTHING, db_column='id_boleta')
 
     class Meta:
@@ -69,16 +72,16 @@ class DetalleBoleta(models.Model):
 
 
 class Empleado(models.Model):
-    id_empleado = models.AutoField(primary_key=True)
+    id_empleado = models.FloatField(primary_key=True)
     nombre = models.CharField(max_length=50)
-    apelido_paterno = models.CharField(max_length=50, blank=True, null=True)
-    apellido_materno = models.CharField(max_length=50, blank=True, null=True)
+    apelido_paterno = models.FloatField()
+    apellido_materno = models.FloatField()
     rut = models.FloatField()
     dv_rut = models.CharField(max_length=1)
     direccion = models.CharField(max_length=50)
     telefono = models.FloatField()
     fecha_contrato = models.CharField(max_length=50)
-    fecha_termino_contrato = models.CharField(max_length=50)
+    fecha_termino_contrato = models.CharField(max_length=50, blank=True, null=True)
     cargo = models.CharField(max_length=50)
     sueldo = models.FloatField()
 
@@ -88,7 +91,7 @@ class Empleado(models.Model):
 
 
 class Fiado(models.Model):
-    id_fiado = models.AutoField(primary_key=True)
+    id_fiado = models.FloatField(primary_key=True)
     monto = models.FloatField()
     plazo = models.CharField(max_length=50)
     id_boleta = models.ForeignKey(Boleta, models.DO_NOTHING, db_column='id_boleta')
@@ -103,7 +106,7 @@ class Fiado(models.Model):
 
 
 class Informe(models.Model):
-    id_informe = models.AutoField(primary_key=True)
+    id_informe = models.FloatField(primary_key=True)
     descripcion = models.CharField(max_length=100)
 
     class Meta:
@@ -112,7 +115,7 @@ class Informe(models.Model):
 
 
 class OrdenPedido(models.Model):
-    id_orden = models.AutoField(primary_key=True)
+    id_orden = models.FloatField(primary_key=True)
     detalle_orden = models.CharField(max_length=100)
     id_proveedor = models.ForeignKey('Proveedor', models.DO_NOTHING, db_column='id_proveedor')
     id_informe = models.ForeignKey(Informe, models.DO_NOTHING, db_column='id_informe')
@@ -123,7 +126,7 @@ class OrdenPedido(models.Model):
 
 
 class PagoFiado(models.Model):
-    id_pago = models.AutoField(primary_key=True)
+    id_pago = models.FloatField(primary_key=True)
     id_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='id_cliente')
     estado_pago = models.CharField(max_length=1)
     valor_abono = models.FloatField()
@@ -134,7 +137,7 @@ class PagoFiado(models.Model):
 
 
 class Pedido(models.Model):
-    id_pedido = models.AutoField(primary_key=True)
+    id_pedido = models.FloatField(primary_key=True)
     id_empleado = models.ForeignKey(Empleado, models.DO_NOTHING, db_column='id_empleado')
     id_detalle = models.ForeignKey(DetalleBoleta, models.DO_NOTHING, db_column='id_detalle')
 
@@ -144,16 +147,17 @@ class Pedido(models.Model):
 
 
 class Producto(models.Model):
-    id_producto = models.AutoField(primary_key=True)
+    id_producto = models.FloatField(primary_key=True)
     nombre = models.CharField(max_length=50)
-    precio = models.FloatField()
     descripcion = models.CharField(max_length=100)
-    fecha_vencimiento = models.CharField(max_length=100)
+    precio = models.FloatField()
+    fecha_vencimiento = models.DateField()
     id_tipo_producto = models.ForeignKey('TipoProducto', models.DO_NOTHING, db_column='id_tipo_producto')
     id_orden = models.ForeignKey(OrdenPedido, models.DO_NOTHING, db_column='id_orden')
     id_recepcion = models.ForeignKey('RecepcionProducto', models.DO_NOTHING, db_column='id_recepcion')
     stock = models.FloatField()
     barcode = models.FloatField()
+    img_tipo = models.BinaryField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -161,12 +165,11 @@ class Producto(models.Model):
 
 
 class Proveedor(models.Model):
-    id_proveedor = models.AutoField(primary_key=True)
+    id_proveedor = models.FloatField(primary_key=True)
     nombre_proveedor = models.CharField(max_length=50)
     rubro = models.CharField(max_length=50)
     telefono = models.FloatField()
     correo = models.CharField(max_length=50)
-    contacto = models.CharField(max_length=50)
     id_informe = models.FloatField()
 
     class Meta:
@@ -175,7 +178,7 @@ class Proveedor(models.Model):
 
 
 class RecepcionProducto(models.Model):
-    id_recepcion = models.AutoField(primary_key=True)
+    id_recepcion = models.FloatField(primary_key=True)
     detalle_recepcion = models.CharField(max_length=100)
     id_informe = models.ForeignKey(Informe, models.DO_NOTHING, db_column='id_informe')
     id_orden = models.ForeignKey(OrdenPedido, models.DO_NOTHING, db_column='id_orden')
@@ -186,8 +189,9 @@ class RecepcionProducto(models.Model):
 
 
 class TipoProducto(models.Model):
-    id_tipo_producto = models.AutoField(primary_key=True)
+    id_tipo_producto = models.FloatField(primary_key=True)
     nombre_tipo = models.CharField(max_length=50)
+    img_tipo = models.BinaryField(blank=True, null=True)
 
     class Meta:
         managed = False
