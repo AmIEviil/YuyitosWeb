@@ -71,6 +71,7 @@ def huevosdepascua(request):
 
 
 def InicioSesion(request):
+    
     return render(request, 'app/InicioSesion.html')
 
 

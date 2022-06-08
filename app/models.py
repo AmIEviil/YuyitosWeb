@@ -5,16 +5,21 @@
 #   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
+from statistics import mode
 from django.db import models
+from django.forms import IntegerField
 
 
 class Boleta(models.Model):
     id_boleta = models.FloatField(primary_key=True)
     detalle_boleta = models.CharField(max_length=100)
     valor_boleta = models.FloatField()
-    id_recepcion = models.ForeignKey('RecepcionProducto', models.DO_NOTHING, db_column='id_recepcion')
-    id_pago = models.ForeignKey('PagoFiado', models.DO_NOTHING, db_column='id_pago')
-    id_cliente = models.ForeignKey('Cliente', models.DO_NOTHING, db_column='id_cliente')
+    id_recepcion = models.ForeignKey(
+        'RecepcionProducto', models.DO_NOTHING, db_column='id_recepcion')
+    id_pago = models.ForeignKey(
+        'PagoFiado', models.DO_NOTHING, db_column='id_pago')
+    id_cliente = models.ForeignKey(
+        'Cliente', models.DO_NOTHING, db_column='id_cliente')
 
     class Meta:
         managed = False
@@ -39,7 +44,8 @@ class Cliente(models.Model):
 class CodigoBarra(models.Model):
     id_codigo_barra = models.FloatField(primary_key=True)
     img_codigo = models.BinaryField()
-    id_producto = models.ForeignKey('Producto', models.DO_NOTHING, db_column='id_producto')
+    id_producto = models.ForeignKey(
+        'Producto', models.DO_NOTHING, db_column='id_producto')
 
     class Meta:
         managed = False
@@ -50,8 +56,10 @@ class Comprobante(models.Model):
     nc = models.FloatField(primary_key=True)
     fecha_comprobante = models.CharField(max_length=50)
     valor = models.FloatField()
-    id_empleado = models.ForeignKey('Empleado', models.DO_NOTHING, db_column='id_empleado')
-    id_detalle = models.ForeignKey('DetalleBoleta', models.DO_NOTHING, db_column='id_detalle')
+    id_empleado = models.ForeignKey(
+        'Empleado', models.DO_NOTHING, db_column='id_empleado')
+    id_detalle = models.ForeignKey(
+        'DetalleBoleta', models.DO_NOTHING, db_column='id_detalle')
 
     class Meta:
         managed = False
@@ -64,7 +72,8 @@ class DetalleBoleta(models.Model):
     producto = models.FloatField()
     cantidad = models.FloatField()
     precio = models.FloatField()
-    id_boleta = models.ForeignKey(Boleta, models.DO_NOTHING, db_column='id_boleta')
+    id_boleta = models.ForeignKey(
+        Boleta, models.DO_NOTHING, db_column='id_boleta')
 
     class Meta:
         managed = False
@@ -81,7 +90,8 @@ class Empleado(models.Model):
     direccion = models.CharField(max_length=50)
     telefono = models.FloatField()
     fecha_contrato = models.CharField(max_length=50)
-    fecha_termino_contrato = models.CharField(max_length=50, blank=True, null=True)
+    fecha_termino_contrato = models.CharField(
+        max_length=50, blank=True, null=True)
     cargo = models.CharField(max_length=50)
     sueldo = models.FloatField()
 
@@ -94,11 +104,16 @@ class Fiado(models.Model):
     id_fiado = models.FloatField(primary_key=True)
     monto = models.FloatField()
     plazo = models.CharField(max_length=50)
-    id_boleta = models.ForeignKey(Boleta, models.DO_NOTHING, db_column='id_boleta')
-    id_detalle = models.ForeignKey(DetalleBoleta, models.DO_NOTHING, db_column='id_detalle')
-    id_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='id_cliente')
-    id_orden = models.ForeignKey('OrdenPedido', models.DO_NOTHING, db_column='id_orden')
-    id_empleado = models.ForeignKey(Empleado, models.DO_NOTHING, db_column='id_empleado')
+    id_boleta = models.ForeignKey(
+        Boleta, models.DO_NOTHING, db_column='id_boleta')
+    id_detalle = models.ForeignKey(
+        DetalleBoleta, models.DO_NOTHING, db_column='id_detalle')
+    id_cliente = models.ForeignKey(
+        Cliente, models.DO_NOTHING, db_column='id_cliente')
+    id_orden = models.ForeignKey(
+        'OrdenPedido', models.DO_NOTHING, db_column='id_orden')
+    id_empleado = models.ForeignKey(
+        Empleado, models.DO_NOTHING, db_column='id_empleado')
 
     class Meta:
         managed = False
@@ -117,8 +132,10 @@ class Informe(models.Model):
 class OrdenPedido(models.Model):
     id_orden = models.FloatField(primary_key=True)
     detalle_orden = models.CharField(max_length=100)
-    id_proveedor = models.ForeignKey('Proveedor', models.DO_NOTHING, db_column='id_proveedor')
-    id_informe = models.ForeignKey(Informe, models.DO_NOTHING, db_column='id_informe')
+    id_proveedor = models.ForeignKey(
+        'Proveedor', models.DO_NOTHING, db_column='id_proveedor')
+    id_informe = models.ForeignKey(
+        Informe, models.DO_NOTHING, db_column='id_informe')
 
     class Meta:
         managed = False
@@ -127,7 +144,8 @@ class OrdenPedido(models.Model):
 
 class PagoFiado(models.Model):
     id_pago = models.FloatField(primary_key=True)
-    id_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='id_cliente')
+    id_cliente = models.ForeignKey(
+        Cliente, models.DO_NOTHING, db_column='id_cliente')
     estado_pago = models.CharField(max_length=1)
     valor_abono = models.FloatField()
 
@@ -138,8 +156,10 @@ class PagoFiado(models.Model):
 
 class Pedido(models.Model):
     id_pedido = models.FloatField(primary_key=True)
-    id_empleado = models.ForeignKey(Empleado, models.DO_NOTHING, db_column='id_empleado')
-    id_detalle = models.ForeignKey(DetalleBoleta, models.DO_NOTHING, db_column='id_detalle')
+    id_empleado = models.ForeignKey(
+        Empleado, models.DO_NOTHING, db_column='id_empleado')
+    id_detalle = models.ForeignKey(
+        DetalleBoleta, models.DO_NOTHING, db_column='id_detalle')
 
     class Meta:
         managed = False
@@ -152,9 +172,12 @@ class Producto(models.Model):
     descripcion = models.CharField(max_length=100)
     precio = models.FloatField()
     fecha_vencimiento = models.DateField()
-    id_tipo_producto = models.ForeignKey('TipoProducto', models.DO_NOTHING, db_column='id_tipo_producto')
-    id_orden = models.ForeignKey(OrdenPedido, models.DO_NOTHING, db_column='id_orden')
-    id_recepcion = models.ForeignKey('RecepcionProducto', models.DO_NOTHING, db_column='id_recepcion')
+    id_tipo_producto = models.ForeignKey(
+        'TipoProducto', models.DO_NOTHING, db_column='id_tipo_producto')
+    id_orden = models.ForeignKey(
+        OrdenPedido, models.DO_NOTHING, db_column='id_orden')
+    id_recepcion = models.ForeignKey(
+        'RecepcionProducto', models.DO_NOTHING, db_column='id_recepcion')
     stock = models.FloatField()
     barcode = models.FloatField()
     img_tipo = models.BinaryField(blank=True, null=True)
@@ -180,8 +203,10 @@ class Proveedor(models.Model):
 class RecepcionProducto(models.Model):
     id_recepcion = models.FloatField(primary_key=True)
     detalle_recepcion = models.CharField(max_length=100)
-    id_informe = models.ForeignKey(Informe, models.DO_NOTHING, db_column='id_informe')
-    id_orden = models.ForeignKey(OrdenPedido, models.DO_NOTHING, db_column='id_orden')
+    id_informe = models.ForeignKey(
+        Informe, models.DO_NOTHING, db_column='id_informe')
+    id_orden = models.ForeignKey(
+        OrdenPedido, models.DO_NOTHING, db_column='id_orden')
 
     class Meta:
         managed = False
@@ -196,3 +221,5 @@ class TipoProducto(models.Model):
     class Meta:
         managed = False
         db_table = 'tipo_producto'
+
+
